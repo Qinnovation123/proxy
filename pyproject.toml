@@ -1,0 +1,48 @@
+[project]
+name = "proxy"
+version = "0"
+requires-python = ">=3.12"
+dependencies = [
+    "brotli-asgi~=1.4.0",
+    "curl-cffi~=0.7.3",
+    "fake-useragent~=1.5.1",
+    "fastapi~=0.115.5",
+    "httptools~=0.6.4",
+    "httpx[http2]~=0.27.2",
+    "niquests~=3.11.1",
+    "playwright~=1.49.0",
+    "ruff~=0.8.0",
+    "uvicorn~=0.32.1",
+    "watchfiles~=1.0.0",
+    "zstandard~=0.23.0",
+    "zstd-asgi~=0.2",
+]
+
+[tool.ruff]
+line-length = 200
+
+[tool.ruff.lint]
+extend-select = [
+    "F",    # flake8
+    "I",    # isort
+    "N",    # pep8-naming
+    "W",    # pycodestyle
+    "UP",   # pyupgrade
+    "TRY",  # tryceratops
+    "RUF",  # ruff
+    "FURB", # refurb
+    "C4",   # flake8-comprehensions
+    "ARG",  # flake8-unused-arguments
+    "PIE",  # flake8-pie
+    "PTH",  # flake8-use-pathlib
+    "RSE",  # flake8-raise
+    "SIM",  # flake8-simplify
+    "SLF",  # flake8-self
+]
+
+[tool.pyright]
+typeCheckingMode = "standard"
+
+[tool.m.aliases]
+dev = "watchfiles 'uvicorn main:app --host localhost'"  # PlayWright can't work with `--reload` on Windows
+fmt = { cmd = "ruff format && ruff check --fix --show-fixes", shell = true }
