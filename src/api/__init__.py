@@ -1,11 +1,13 @@
 from traceback import format_exception_only
 
+from fastapi import HTTPException
+
 from ..utils.ua import get_ua
 
 
-class FetchError(Exception):
+class FetchError(HTTPException):
     def __init__(self):
-        super().__init__("Tried all fetch implementations, all failed.")
+        super().__init__(500, "Tried all fetch implementations, all failed.")
 
 
 def get_error_message(e: Exception):
