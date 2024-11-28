@@ -30,9 +30,10 @@ db = TypedDB[Response]("v1")
 
 
 @app.get("/proxy")
-async def proxy(url: str = Depends(get_url), headers=Depends(get_filtered_headers), accept: str = Header("", include_in_schema=False)):
-    with suppress(KeyError):
-        return db[url]
+async def proxy(url: str = Depends(get_url), headers=Depends(get_filtered_headers), accept: str = Header("", include_in_schema=False), refresh: bool = False):
+    if not refresh:
+        with suppress(KeyError):
+            return db[url]
     content = await get(url, headers)
     db[url] = res = Response(content)
     if "html" in accept:
