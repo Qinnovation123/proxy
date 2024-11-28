@@ -1,3 +1,4 @@
+from contextlib import suppress
 from urllib.parse import urljoin
 
 from fastapi import Cookie, Depends, FastAPI, Header, Request, Response
@@ -5,6 +6,7 @@ from fastapi.responses import RedirectResponse
 from pydantic_core import Url
 
 from src.api import get
+from src.utils.db import TypedDB
 
 app = FastAPI()
 
@@ -16,16 +18,25 @@ def filter_headers(headers):
     return {key: value for key, value in headers.items() if key.lower() not in filtered_headers}
 
 
-async def get_filtered_headers(req: Request):
+def get_filtered_headers(req: Request):
     return filter_headers(req.headers)
 
 
+def get_url(url: Url):
+    return str(url)
+
+
+db = TypedDB[Response]("v1")
+
+
 @app.get("/proxy")
-async def proxy(url: Url, headers=Depends(get_filtered_headers), accept: str = Header("", include_in_schema=False)):
-    content = await get(str(url), headers)
-    res = Response(content)
+async def proxy(url: str = Depends(get_url), headers=Depends(get_filtered_headers), accept: str = Header("", include_in_schema=False)):
+    with suppress(KeyError):
+        return db[url]
+    content = await get(url, headers)
+    db[url] = res = Response(content)
     if "html" in accept:
-        res.set_cookie("proxied_from", str(url))
+        res.set_cookie("proxied_from", url)
     return res
 
 

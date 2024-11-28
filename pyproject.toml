@@ -5,6 +5,7 @@ requires-python = ">=3.12"
 dependencies = [
     "brotli-asgi~=1.4.0",
     "curl-cffi~=0.7.3",
+    "diskcache~=5.6.3",
     "fake-useragent~=1.5.1",
     "fastapi~=0.115.5",
     "httptools~=0.6.4",
@@ -44,5 +45,5 @@ extend-select = [
 typeCheckingMode = "standard"
 
 [tool.m.aliases]
-dev = "watchfiles 'uvicorn main:app --host localhost'"  # PlayWright can't work with `--reload` on Windows
+dev = "watchfiles 'uvicorn main:app --host localhost' --filter python"  # PlayWright can't work with `--reload` on Windows
 fmt = { cmd = "ruff format && ruff check --fix --show-fixes", shell = true }
