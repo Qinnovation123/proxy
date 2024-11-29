@@ -6,7 +6,7 @@ from fastapi.responses import RedirectResponse
 from pydantic_core import Url
 
 from src.api import get
-from src.utils.db import TypedDB
+from src.utils.db import Cache
 
 app = FastAPI()
 
@@ -26,7 +26,7 @@ def get_url(url: Url):
     return str(url)
 
 
-db = TypedDB[Response]("v1")
+db = Cache[Response]("v1")
 
 
 @app.get("/proxy")
