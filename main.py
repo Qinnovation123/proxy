@@ -35,9 +35,10 @@ async def proxy(url: str = Depends(get_url), headers=Depends(get_filtered_header
         with suppress(KeyError):
             return db[url]
     content = await get(url, headers)
-    db[url] = res = Response(content)
+    res = Response(content)
     if "html" in accept:
         res.set_cookie("proxied_from", url)
+    db[url] = res
     return res
 
 
