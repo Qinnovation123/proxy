@@ -18,17 +18,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: astral-sh/setup-uv@v5
         with:
           python-version: 3.12
+          enable-cache: true
+          cache-dependency-glob: pyproject.toml
       - name: Install dependencies
         run: |
-          pip install uv --disable-pip-version-check --no-cache-dir
-          uv pip install -r pyproject.toml --system
+          uv pip install -r pyproject.toml basedpyright
       - name: Check code quality
         run: |
           ruff format --check --diff
           ruff check --diff
       - name: Check typing
         run: |
-          npx pyright
+          basedpyright
