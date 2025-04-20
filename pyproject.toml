@@ -13,8 +13,7 @@ dependencies = [
     "niquests~=3.14.0",
     "playwright~=1.51.0",
     "ruff~=0.11.0",
-    "uvicorn~=0.34.0",
-    "watchfiles~=1.0.0",
+    "uvicorn-hmr[all]~=0.0.6.1",
     "zstandard~=0.23.0",
     "zstd-asgi~=0.2",
 ]
@@ -45,5 +44,5 @@ extend-select = [
 typeCheckingMode = "standard"
 
 [tool.m.aliases]
-dev = "watchfiles 'uvicorn main:app --host localhost' --filter python"  # PlayWright can't work with `--reload` on Windows
+dev = "uvicorn-hmr --reload"
 fmt = { cmd = "ruff format && ruff check --fix --show-fixes", shell = true }
