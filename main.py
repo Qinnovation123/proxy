@@ -60,7 +60,7 @@ async def other(_, req: Request, proxied_from: str = Cookie(), headers=Depends(g
     media_type = None
 
     # heuristics
-    if url.endswith(".js"):
+    if url.endswith((".js", ".mjs")):
         media_type = "application/javascript"
     elif url.endswith(".css"):
         media_type = "text/css"
