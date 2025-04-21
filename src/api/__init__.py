@@ -16,6 +16,12 @@ def get_error_message(e: Exception):
 
 async def get(url: str, headers: dict):
     ua_headers = {"user-agent": get_ua()}
+    headers["x-disclaimer"] = (
+        "We are fetching this literature for academic research purposes only. "
+        "We kindly request that you do not block our access. "
+        "If you have any concerns, please contact me at Muspi Merol <me@promplate.dev>. "
+        "Thank you for your understanding."
+    )
 
     from ..impl.niquests import get
 
