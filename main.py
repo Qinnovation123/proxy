@@ -26,7 +26,7 @@ def get_url(url: Url):
     return str(url)
 
 
-db = Cache[Response]("v1", cull_limit=0)
+db = Cache[Response]("v1", size_limit=1024 * 1024 * 3)
 
 
 @app.get("/proxy")
