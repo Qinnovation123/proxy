@@ -5,7 +5,7 @@ requires-python = ">=3.12"
 dependencies = [
     "brotli-asgi~=1.4.0",
     "curl-cffi~=0.10.0",
-    "diskcache2~=0.1.1",
+    "diskcache2~=1.0.0",
     "fake-useragent~=2.2.0",
     "fastapi~=0.115.5",
     "httptools~=0.6.4",
