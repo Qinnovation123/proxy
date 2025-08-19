@@ -14,7 +14,7 @@ dependencies = [
     "playwright~=1.54.0",
     "ruff~=0.12.0",
     "uvicorn-hmr[all]~=0.0.7",
-    "zstandard~=0.23.0",
+    "zstandard~=0.24.0",
     "zstd-asgi~=0.2",
 ]
 
