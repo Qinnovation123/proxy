@@ -13,7 +13,7 @@ dependencies = [
     "niquests~=3.18.2",
     "playwright~=1.58.0",
     "ruff~=0.15.6",
-    "uvicorn-hmr[all]~=0.1.0",
+    "uvicorn-hmr[all]~=0.1.1",
     "zstandard~=0.25.0",
     "zstd-asgi~=1.0",
 ]
